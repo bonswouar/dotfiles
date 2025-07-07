@@ -21,9 +21,9 @@ Feel free to fork and modify for your taste.
 
 ## Screenshots
 
-![Screenshot 1](./misc/screenshot/screenshot1.png)
+![Screenshot 1](./screenshot/screenshot1.png)
 
-![Screenshot 2](./misc/screenshot/screenshot2.png)
+![Screenshot 2](./screenshot/screenshot2.png)
 
 ## Environment & Apps
 
