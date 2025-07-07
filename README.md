@@ -2,14 +2,15 @@
 
 - [Introduction](#introduction)
 - [Screenshots](#screenshots)
-- [Environment](#environment)
+- [Environment & Apps](#environment--apps)
+- [Hotkeys](#hotkeys)
 - [Scripts](#scripts)
 - [Thanks](#thanks)
 - [Notes](#notes)
 
 ## Introduction
 
-My personal Linux dotfiles for Fedora Sway.
+My personal Linux dotfiles for Sway.
 
 To install all the files to `$HOME` with one command:
 ```bash
@@ -21,8 +22,10 @@ Feel free to fork and modify for your taste.
 
 ## Screenshots
 
+Rofi launcher with hotkeys list
 ![Screenshot 1](./screenshot/screenshot1.png)
 
+Some themed apps
 ![Screenshot 2](./screenshot/screenshot2.png)
 
 ## Environment & Apps
@@ -54,20 +57,18 @@ Feel free to fork and modify for your taste.
   - `swayimg` image viewer
   - `swaylock` lock screen
   - `tldr` man but simpler
-  - `VsCodium` IDE
+  - `VSCodium` IDE
   - `waybar` status bar
   - `wl-clipboard` clipboard manager
   - `yazi` TUI file manager
   - `zoxide` cd but smarter
 
-## Special Hotkeys
+## Hotkeys
 
 All you need is:
 - `Mod + Shift + ?` will show a rofi menu that lists all key bindings
 
-_Note: Bindings originally made for an **AZERTY** keyboard_
-
-_Note²: Only Sway binding will work by selecting & pressing Enter on rofi directly_
+_Note: Bindings made for an **AZERTY** keyboard_
 
 ## Scripts
 
@@ -80,7 +81,7 @@ Useful scripts are located in `.local/bin/`
 - [Speyll/dotfiles](https://github.com/Speyll/dotfiles/blob/main/README.md) for the README inspiration
 - [battery-stats](https://github.com/bonswouar/battery-stats/) forked from [petterreinholdtsen/battery-stats](https://github.com/petterreinholdtsen/battery-stats) for battery monitoring and graph
 - Many other public repositories for some scripts and inspiration, including:
-  - [autotiling](https://github.com/nwg-piotr/autotiling): autotiling for sway/i3
+  - [autotiling](https://github.com/nwg-piotr/autotiling): autotiling for Sway/i3
   - [battnotify](https://github.com/kovmir/battnotify): notify when battery low
   - [Gnuplot-Pywal](https://github.com/GideonWolfe/Gnuplot-Pywal): generate gnuplot config
   - [lessfilter-pygmentize](https://github.com/CoeJoder/lessfilter-pygmentize): colors for less
@@ -94,7 +95,7 @@ Useful scripts are located in `.local/bin/`
 
 ## Notes
 
-- This is made for my personnal hardware, on a laptop with a resolution of 2880x1800
+- This is made for my personnal hardware, running Fedora Sway on a laptop with a resolution of 2880x1800
 - Some scripts can be missing, usually when they come directly from an external repository
 - `LATITUDE` and `LONGITUDE` env vars are needed for `wlsunset` (for example in `.bash_profile`), `update-lat-lng.sh` can be used to automatically update them
 - `WASTEBIN_URL` env var needed if you want to use `wastebin` script
