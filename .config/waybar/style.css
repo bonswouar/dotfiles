@@ -1,0 +1,161 @@
+@import "macchiato.css";
+
+* {
+  font-family: FantasqueSansM Nerd Font;
+  font-size: 13px;
+  min-height: 0;
+}
+
+.critical {
+  color: @red;
+}
+
+#waybar {
+  background: transparent;
+  color: @text;
+  margin: 5px 5px;
+}
+
+#workspaces {
+  border-radius: 1rem;
+  margin: 5px;
+  background-color: @surface0;
+  padding-right: 3px;
+}
+
+#workspaces button {
+  color: @lavender;
+  border-radius: 1rem;
+  padding: 0.2rem;
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+  color: @sky;
+  border-radius: 1rem;
+}
+
+#workspaces button.urgent {
+  color: @flamingo;
+}
+
+#workspaces button:hover {
+  color: @sapphire;
+  border-radius: 1rem;
+}
+
+#scratchpad {
+  margin-right:0.5rem;
+}
+
+#custom-music,
+#backlight,
+#clock,
+#tray,
+#battery,
+#pulseaudio,
+#network,
+#cpu_frequency,
+#cpu,
+#memory,
+#temperature,
+#idle_inhibitor,
+#custom-lock,
+#custom-power,
+#custom-dunst,
+#custom-show-screen-refresh-rate,
+#custom-audio-idle-inhibitor {
+  background-color: @surface0;
+  padding: 0.5rem 0.6rem 0.5rem 0.4rem;
+  margin: 5px 0;
+}
+
+
+#custom-music {
+  color: @mauve;
+  border-radius: 1rem;
+  margin-right:1rem;
+}
+
+#idle_inhibitor {
+  border-radius: 1rem 0 0 1rem;
+}
+
+#custom-dunst {
+  padding-right: 0.1rem;
+}
+
+#cpu {
+  color: @blue;
+  padding-right: 0.3rem;
+}
+
+#cpu_frequency {
+  font-style: italic;
+  color: @blue;
+  padding-left: 0;
+}
+
+#memory {
+  color: @sapphire;
+}
+
+#temperature {
+  color: @mauve;
+}
+
+#custom-show-screen-refresh-rate {
+  color: @pink;
+}
+
+#pulseaudio {
+  padding-left: 0.6rem;
+  color: @rosewater;
+}
+
+#pulseaudio.source-muted,
+#pulseaudio.muted {
+  color: @maroon;
+}
+
+#network {
+  color: @peach;
+}
+
+#backlight {
+  color: @yellow;
+}
+
+#battery {
+  padding-left: 0.1rem;
+  color: @green;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @red;
+}
+
+#clock {
+  color: @blue;
+  border-radius: 0px 1rem 1rem 0px;
+  margin-right: 0.3rem;
+}
+
+#tray {
+  padding-left: 0.6rem;
+  background-color: @surface0;
+  margin-right: 0.5rem;
+  border-radius: 1rem;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}

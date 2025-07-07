@@ -1,0 +1,241 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+palette = "catppuccin_macchiato"
+add_newline = false
+
+[line_break]
+disabled = true
+
+[aws]
+symbol = "  "
+
+[buf]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[c]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[conda]
+symbol = " "
+
+[crystal]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[dart]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[directory]
+read_only = " 󰌾"
+truncation_length = 4
+style = "bold lavender"
+
+[docker_context]
+symbol = " "
+
+[elixir]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[elm]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[fennel]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[fossil_branch]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[git_branch]
+symbol = " "
+style = "bold mauve"
+
+[git_commit]
+tag_symbol = '  '
+
+[golang]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[guix_shell]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[haskell]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[haxe]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[hostname]
+ssh_symbol = " "
+
+[java]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[julia]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[kotlin]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[lua]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[memory_usage]
+symbol = "󰍛 "
+
+[meson]
+format = 'via [$symbol]($style)'
+symbol = "󰔷 "
+
+[nim]
+format = 'via [$symbol]($style)'
+symbol = "󰆥 "
+
+[nix_shell]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[nodejs]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[ocaml]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+AlmaLinux = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+RockyLinux = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Void = " "
+Windows = "󰍲 "
+
+[package]
+symbol = "󰏗 "
+
+[perl]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[php]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[pijul_channel]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[python]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[rlang]
+format = 'via [$symbol]($style)'
+symbol = "󰟔 "
+
+[ruby]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[rust]
+format = 'via [$symbol]($style)'
+symbol = "󱘗 "
+
+[scala]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[swift]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[zig]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[gradle]
+format = 'via [$symbol]($style)'
+symbol = " "
+
+[palettes.catppuccin_macchiato]
+rosewater = "#f4dbd6"
+flamingo = "#f0c6c6"
+pink = "#f5bde6"
+mauve = "#c6a0f6"
+red = "#ed8796"
+maroon = "#ee99a0"
+peach = "#f5a97f"
+yellow = "#eed49f"
+green = "#a6da95"
+teal = "#8bd5ca"
+sky = "#91d7e3"
+sapphire = "#7dc4e4"
+blue = "#8aadf4"
+lavender = "#b7bdf8"
+text = "#cad3f5"
+subtext1 = "#b8c0e0"
+subtext0 = "#a5adcb"
+overlay2 = "#939ab7"
+overlay1 = "#8087a2"
+overlay0 = "#6e738d"
+surface2 = "#5b6078"
+surface1 = "#494d64"
+surface0 = "#363a4f"
+base = "#24273a"
+mantle = "#1e2030"
+crust = "#181926"

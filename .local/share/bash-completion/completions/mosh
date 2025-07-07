@@ -1,0 +1,254 @@
+#!/bin/sh
+## bash completion for `mosh` (based on ssh bash completion)
+
+_comp_cmd_ssh__compgen_suboption()
+{
+    # Split into subopt and subval
+    local _prev=${2%%=*} cur=${2#*=}
+
+    case ${_prev,,} in
+        batchmode | canonicaldomains | canonicalizefallbacklocal | \
+            challengeresponseauthentication | checkhostip | \
+            clearallforwardings | controlpersist | compression | \
+            enablesshkeysign | exitonforwardfailure | forwardagent | \
+            forwardx11 | forwardx11trusted | gatewayports | \
+            gssapiauthentication | gssapikeyexchange | \
+            gssapidelegatecredentials | gssapirenewalforcesrekey | \
+            gssapitrustdns | hashknownhosts | hostbasedauthentication | \
+            identitiesonly | kbdinteractiveauthentication | \
+            kbdinteractivedevices | nohostauthenticationforlocalhost | \
+            passwordauthentication | permitlocalcommand | proxyusefdpass | \
+            pubkeyauthentication | rhostsrsaauthentication | \
+            rsaauthentication | streamlocalbindunlink | \
+            tcpkeepalive | useprivilegedport | visualhostkey)
+            _comp_compgen -- -W 'yes no'
+            ;;
+	addkeystoagent)
+            _comp_compgen -- -W 'yes ask confirm no'
+            ;;
+        addressfamily)
+            _comp_compgen -- -W 'any inet inet6'
+            ;;
+	bindaddress)
+            _comp_compgen_ip_addresses
+            ;;
+        canonicalizehostname)
+            _comp_compgen -- -W 'yes no always'
+            ;;
+        identityfile)
+            _comp_xfunc_ssh_compgen_identityfile
+            ;;
+        *file | identityagent | include | controlpath | revokedhostkeys | \
+            xauthlocation)
+            _comp_compgen_filedir
+            ;;
+        casignaturealgorithms)
+            _comp_cmd_ssh__compgen_query "$1" sig
+            ;;
+        cipher)
+            _comp_compgen -- -W 'blowfish des 3des'
+            ;;
+        ciphers)
+            _comp_cmd_ssh__compgen_ciphers "$1"
+            ;;
+        controlmaster)
+            _comp_compgen -- -W 'yes ask auto autoask no'
+            ;;
+        compressionlevel)
+            _comp_compgen -- -W '{1..9}'
+            ;;
+        fingerprinthash)
+            _comp_compgen -- -W 'md5 sha256'
+            ;;
+        ipqos)
+            _comp_compgen -- -W 'af1{1..4} af2{2..3} af3{1..3} af4{1..3}
+                cs{0..7} ef lowdelay throughput reliability'
+            ;;
+        hostbasedkeytypes | hostkeyalgorithms)
+            _comp_cmd_ssh__compgen_query "$1" key
+            ;;
+        kexalgorithms)
+            _comp_cmd_ssh__compgen_query "$1" kex
+            ;;
+        loglevel)
+            _comp_compgen -- -W 'QUIET FATAL ERROR INFO VERBOSE DEBUG{,1,2,3}'
+            ;;
+        macs)
+            _comp_cmd_ssh__compgen_macs "$1"
+            ;;
+        pkcs11provider)
+            _comp_compgen_filedir so
+            ;;
+        preferredauthentications)
+            _comp_compgen -- -W 'gssapi-with-mic host-based publickey
+                keyboard-interactive password'
+            ;;
+        protocol)
+            local -a protocols
+            _comp_compgen -v protocols -i ssh query "$1" protocol-version
+            [[ ${protocols-} ]] || protocols=(1 2)
+            if ((${#protocols[@]} > 1)); then
+                _comp_compgen -- -W '"${protocols[@]}"'
+            fi
+            ;;
+        proxyjump)
+            _comp_compgen_known_hosts -a ${configfile:+-F "$configfile"} -- "$cur"
+            ;;
+        proxycommand | remotecommand | localcommand)
+            _comp_compgen_commands
+            ;;
+        pubkeyacceptedalgorithms | pubkeyacceptedkeytypes)
+            _comp_cmd_ssh__compgen_query "$1" key
+            ;;
+        requesttty)
+            _comp_compgen -- -W 'no yes force auto'
+            ;;
+        requiredrsasize)
+            _comp_compgen -- -W '1024 2048 3072 4096 7680 15360'
+            ;;
+        stricthostkeychecking)
+            _comp_compgen -- -W 'accept-new ask no off'
+            ;;
+        syslogfacility)
+            _comp_compgen -- -W 'DAEMON USER AUTH LOCAL{0..7}'
+            ;;
+        tunnel)
+            _comp_compgen -- -W 'yes no point-to-point ethernet'
+            ;;
+        updatehostkeys | verifyhostkeydns)
+            _comp_compgen -- -W 'yes no ask'
+            ;;
+    esac
+    return 0
+}
+
+_comp_cmd_ssh__compgen_suboption_check()
+{
+    # Get prev and cur words without splitting on =
+    local cur prev
+    _comp_get_words -n := cur prev
+    if [[ $cur == *=* && $prev == -*o ]]; then
+        _comp_unlocal prev
+        _comp_cmd_ssh__compgen_suboption "$1" "$cur"
+        return $?
+	fi
+	return 1
+}
+
+_comp_cmd_ssh__configfile()
+{
+    configfile=""
+    set -- "${words[@]}"
+    while (($# > 0)); do
+        if [[ $1 == -F* ]]; then
+            local REPLY
+            if ((${#1} > 2)); then
+               	_comp_dequote "${1:2}" && configfile=$REPLY
+            else
+                shift
+               	[[ ${1-} ]] && _comp_dequote "$1" && configfile=$REPLY
+            fi
+            break
+	fi
+	shift
+    done
+}
+
+_comp_cmd_ssh()
+{
+    local cur prev words cword comp_args
+    _comp_initialize -n : -- "$@" || return
+    local configfile
+    _comp_cmd_ssh__configfile
+
+    _comp_cmd_ssh__compgen_suboption_check "$1" && return
+
+    local ipvx
+
+    # Keep cases sorted the same they're in ssh's usage message
+    # (but do group ones with same arg completion)
+    case $prev in
+        -*B)
+            _comp_compgen_available_interfaces -a
+            return
+            ;;
+        -*b)
+            _comp_compgen_ip_addresses
+            return
+            ;;
+        -*c)
+            _comp_cmd_ssh__compgen_ciphers "$1"
+            return
+            ;;
+        -*[DeLpRW])
+            return
+            ;;
+        -*[EFS])
+            _comp_compgen_filedir
+            return
+            ;;
+        -*I)
+            _comp_compgen_filedir so
+            return
+            ;;
+        -*i)
+            _comp_xfunc_ssh_compgen_identityfile
+            return
+            ;;
+        -*J)
+            _comp_compgen_known_hosts -a ${configfile:+-F "$configfile"} -- "$cur"
+            return
+            ;;
+        -*l)
+            _comp_compgen -- -u
+            return
+            ;;
+        -*m)
+            _comp_cmd_ssh__compgen_macs "$1"
+            return
+       	   ;;
+	-*O)
+            _comp_compgen -- -W 'check forward cancel exit stop'
+            return
+            ;;
+	-*o)
+            _comp_xfunc_ssh_compgen_options "$1"
+            return
+            ;;
+	-*Q)
+	   _comp_cmd_ssh__compgen_queries "$1"
+            return
+            ;;
+	-*w)
+            _comp_compgen_available_interfaces
+            return
+            ;;
+       	-*4*)
+            ipvx=-4
+            ;;
+        -*6*)
+            ipvx=-6
+            ;;
+    esac
+
+    if [[ $cur == -F* ]]; then
+        _comp_compgen -c "${cur#-F}" filedir
+        # Prefix completions with '-F'
+       	COMPREPLY=("${COMPREPLY[@]/#/-F}")
+    elif [[ $cur == -* ]]; then
+        _comp_compgen_usage
+    else
+        local REPLY
+        # Keep glob sort in sync with cases above
+        _comp_count_args -n "=" -a "-*[BbcDeLpRWEFSIiJlmOoQw]"
+        if ((REPLY > 1)); then
+            compopt -o filenames
+            _comp_compgen_commands
+        else
+            _comp_compgen_known_hosts ${ipvx-} -a ${configfile:+-F "$configfile"} \
+               	-- "$cur"
+        fi
+    fi
+} &&
+    shopt -u hostcomplete &&
+    complete -F _comp_cmd_ssh mosh

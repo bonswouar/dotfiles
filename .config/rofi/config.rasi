@@ -1,0 +1,24 @@
+@import "catppuccin-frappe"
+
+configuration{
+    modi: "run,drun,window";
+    icon-theme: "besgnulinux-mono-grey";
+    show-icons: true;
+    terminal: "foot";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-combi: "combi";
+    display-drun: " 󰌧 ";
+    display-run: "   ";
+    display-calc: "  ";
+    display-window: " ";
+    display-Network: "󰤨  Network";
+    display-ssh: "🖧  SSH";
+    display-clipboard: "  ";
+    display-combi: "  ";
+    sidebar-mode: true;
+}
+
+@theme "catppuccin-frappe-compact.rasi"

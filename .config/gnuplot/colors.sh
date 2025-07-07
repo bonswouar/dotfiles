@@ -1,0 +1,9 @@
+background="$surface0"
+grid="$overlay0" # grid
+border="$overlay1"
+color1="$blue" # pluged in
+color2="$red" # discharging
+color3="$overlay0" # unknown
+color4="$base" # slope
+label1="$subtext0" #xlabel
+label2="$subtext1" #ylabel
