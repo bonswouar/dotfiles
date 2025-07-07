@@ -9,15 +9,15 @@
 
 ## Introduction
 
-My personal Linux dotfiles with Sway.
+My personal Linux dotfiles for Fedora Sway.
 
-Using Fedora, but should be compatible with many distributions.
-
-To install all the dotfiles to `$HOME` with one command:
+To install all the files to `$HOME` with one command:
 ```bash
 stow -t $HOME .
 ```
-Or alternatively (recommended), only for the directories needed (`man stow` or `tldr stow`)
+Or alternatively *(recommended)*, only for the directories needed: `man stow` or `tldr stow`
+
+Feel free to fork and modify for your taste.
 
 ## Screenshots
 
@@ -65,8 +65,9 @@ Or alternatively (recommended), only for the directories needed (`man stow` or `
 All you need is:
 - `Mod + Shift + ?` will show a rofi menu that lists all key bindings
 
-Note: Bindings originally made for an **AZERTY** keyboard
-Note²: Only Sway binding will work by selecting & pressing Enter on rofi
+_Note: Bindings originally made for an **AZERTY** keyboard_
+
+_Note²: Only Sway binding will work by selecting & pressing Enter on rofi directly_
 
 ## Scripts
 
