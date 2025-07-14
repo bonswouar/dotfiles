@@ -49,7 +49,7 @@ alias ssh='TERM=xterm-color ssh'
 alias mosh='TERM=xterm-color mosh'
 
 # history
-export HISTCONTROL=ignorespace:ignoredups:erasedups
+export HISTCONTROL=ignoredups:erasedups
 HISTSIZE=50000
 HISTFILESIZE=100000
 
