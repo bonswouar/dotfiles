@@ -2,7 +2,11 @@
 ## sway > switch to next supported refresh rate
 ##        or to the rate passed as argument
 
-notify="notify-send -u low sway -i $HOME/.local/share/image/dunst/screen.svg"
+if pidof dunst > /dev/null ; then
+    notify="notify-send -u low sway -i $HOME/.local/share/image/dunst/screen.svg"
+else
+    notify="echo"
+fi
 
 outputs=$(swaymsg -t get_outputs)
 
@@ -10,7 +14,7 @@ mode=$(echo "$outputs" | jq  '.[0] .["current_mode"] ')
 width=$(echo "$mode" | jq '.["width"]')
 height=$(echo "$mode" | jq '.["height"]')
 output_name=$(echo "$outputs" | jq '.[0] .["name"]')
-rates=$(echo "$outputs" | jq  "`printf '.[0] .["modes"] .[] | select((.width==%s) and (.height=%s))' "$width" "$height"`" | jq '.["refresh"]' | sort | uniq)
+rates=$(echo "$outputs" | jq  "`printf '.[0] .["modes"] .[] | select((".width==%s") and (".height=%s"))' "$width" "$height"`" | jq '.["refresh"]' | sort | uniq)
 current_rate=$(echo "$mode" | jq  '.["refresh"]')
 
 _switch_sway_output_rate() {
