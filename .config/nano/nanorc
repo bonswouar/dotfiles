@@ -346,3 +346,8 @@ include "/usr/share/nano/*.nanorc"
 # bind ^U "{mark}{home}{zap}" main
 # bind ^Z undo main
 # bind ^Y redo main
+
+### Custom syntax highlight
+## from https://github.com/serialhex/nano-highlight
+
+include "~/.config/nano/Dockerfile.nanorc"

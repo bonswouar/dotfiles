@@ -259,8 +259,8 @@
         "format": "  {}",
         "escape": true,
         "interval": 5,
-        "tooltip": false,
-        "exec": "playerctl metadata --format='{{ title }} - {{artist}}'",
+        "tooltip": "playerctl metadata --format='{{ title }} - {{artist}}'",
+        "exec": "playerctl metadata --format='{{ title }} - {{artist}}' | sed 's/[^a-zA-Z0-9ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ +-=,;:!?.@()]//g'",
         "on-click": "playerctl play-pause",
         "max-length": 50
     }

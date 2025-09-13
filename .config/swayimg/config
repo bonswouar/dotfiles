@@ -1,4 +1,8 @@
-[general]
-compositor = no
+[list]
+all = yes
+
+[info]
+show = no
+
 [viewer]
 window = #24273A

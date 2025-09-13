@@ -18,11 +18,17 @@ client.unfocused         $overlay0 $base $text  $rosewater $overlay0
 client.urgent            $peach    $base $peach $overlay0  $peach
 client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
 client.background        $base
+
+# windows gapps
 gaps inner 6
+gaps outer -6
 
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+
+# cursor theme
+seat * xcursor_theme catppuccin-macchiato-dark-cursors 17
 
 # Your preferred terminal emulator
 # Recommends: foot
@@ -61,8 +67,10 @@ exec sway-audio-idle-inhibit
 # redshift
 exec wlsunset -l $LATITUDE -L $LONGITUDE -t 5000
 
-## Rofi // Clipboard and Calculator //  C ##
-bindsym $mod+c exec rofi -show clipboard -modes "clipboard:~/.local/bin/cliphist-rofi-img,calc" -calc-command "wl-copy '{result}'"
+## Rofi // Clipboard //  C ##
+bindsym $mod+c exec rofi -show clipboard -modes "clipboard:~/.local/bin/cliphist-rofi-img"
+## Rofi // Calculator //  ##
+bindsym XF86Calculator exec rofi -show calc -modes "calc" -calc-command "wl-copy '{result}'"
 # empty calc history on boot
 exec rm -f $HOME/.local/share/rofi/rofi_calc_history
 
@@ -74,6 +82,9 @@ bindsym $mod+Shift+s exec $HOME/.local/bin/rofi-systemd
 
 ## Rofi // Hotkeys help //   󰘶 ? ##
 bindsym $mod+shift+comma exec rofi -modi hotkeys:~/.local/bin/rofi-shortcut.sh -show hotkeys -theme $HOME/.config/rofi/catppuccin-frappe-compact.rasi
+
+## Rofi // VSCode recents //   󰘶 V ##
+bindsym $mod+shift+v exec rofi -show vscode-recent -modi vscode-recent
 
 ### Output configuration
 #
@@ -93,8 +104,8 @@ output * bg $HOME/background.jpg fill
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 300 "$HOME/.local/bin/swaylock_and_dunst_pause.sh" \
-         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         timeout 90 "$HOME/.local/bin/swaylock_and_dunst_pause.sh" \
+         timeout 300 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep "$HOME/.local/bin/swaylock_and_dunst_pause.sh"
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -105,18 +116,21 @@ exec swayidle -w \
 input "1:1:AT_Translated_Set_2_keyboard" {
     xkb_layout "fr"
     xkb_variant "azerty"
+    xkb_options "caps:shiftlock"
 }
+
 input "type:touchpad" {
     tap enabled
     natural_scroll enabled
     # disable (touchpad) while typing
     dwt enabled
     # disable (touchpad) while track pointing
-    dwtp enabled
+#    dwtp enabled
     # tap with 1 finger = left click, 2 fingers = right click, 3 fingers = middle click
     tap_button_map lrm
     accel_profile "flat"
     scroll_factor 0.7
+    pointer_accel 0.6 # mouse sensitivity (between -1 and 1)
 }
 #
 # Example configuration:
@@ -135,7 +149,7 @@ input "type:touchpad" {
 #
 # Basics:
 #
-    ## Launch // Terminal //   ⏎ ##
+    ## Launch // Foot //   ⏎ ##
     bindsym $mod+Return exec $term
 
     ## Launch // Lock session //   󰘶 L ##
@@ -144,7 +158,7 @@ input "type:touchpad" {
     ## Navigation // Kill focused window //   󰘶 Q ##
     bindsym $mod+Shift+q kill
 
-    ## Launch // Applications //  D ##
+    ## Rofi // Applications //  D ##
     bindsym $mod+d exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
@@ -206,21 +220,32 @@ bindsym $mod+Tab workspace next
 ## Navigation // Switch to previous workspace //   󰘶  󰌒 ##
 bindsym $mod+Shift+Tab workspace prev
 
-## Rofi // Take screenshot //   🖨 ##
+## Rofi // Take screenshot //    ##
 bindsym $mod+Print exec ~/.local/bin/grimshot-rofi.sh
+
+## Sway // Toggle screen on/off //  P ##
+bindsym $mod+P output eDP-1 power toggle
 
 ### Static workspaces
 # Desktop 1 - terms & others
 # Desktop 2 - Librewolf
+#assign [title="LibreWolf$"] 2
+#for_window [title="LibreWolf$"] focus
 assign [title="LibreWolf"] 2
 for_window [title="LibreWolf"] focus
+#assign [title="LibreWolf Private Browsing$"] 3
+#for_window [title="LibreWolf Private Browsing$"] focus
 # Desktop 3 - LibreWolf private windows
-for_window [title="LibreWolf Private Browsing"] move to workspace 3
-for_window [title="LibreWolf Private Browsing"] focus
+for_window [title="LibreWolf Private Browsing$"] move to workspace 3
+for_window [title="LibreWolf Private Browsing$"] focus
 # Desktop 4 - VSCodium
 assign [class="VSCodium"] 4
 for_window [class="VSCodium"] focus
 # Desktop 5 - Instant Messaging
+#for_window [title="gomuks web — LibreWolf"] layout tabbed
+#for_window [title="gomuks web — LibreWolf"] move to workspace 5
+#for_window [title=".*WhatsApp — LibreWolf"] layout tabbed
+#for_window [title=".*WhatsApp — LibreWolf"] move to workspace 5
 for_window [app_id="FFPWA-01JYHB3HAPG7AZ0Y0TS4CWEMMN"] layout tabbed
 assign [app_id="FFPWA-01JYHB3HAPG7AZ0Y0TS4CWEMMN"] 5
 for_window [app_id="FFPWA-01JYHE7GTE02WY74XXMGS0ZCWG"] layout tabbed
@@ -235,6 +260,7 @@ assign [app_id="net.thunderbird.Thunderbird"] 6
 assign [app_id="com.github.iwalton3.jellyfin-media-player"] 7
 # Desktop 8 - Games
 assign [class="steam"] 8
+assign [class="heroic"] 8
 for_window [class="steam"] floating enable
 
 # Floating windows
@@ -247,6 +273,7 @@ for_window [instance="guvcview"] floating enable
 for_window [app_id="setroubleshoot"] floating enable
 for_window [app_id="blueman-manager"] floating enable
 for_window [app_id="mpv"] floating enable
+for_window [app_id="xarchiver"] floating enable
 
 ## Notifications // Toggle On/Off //   󱊫 ##
 bindsym $mod+F1 exec --no-startup-id ~/.local/bin/dunst-toggle.sh
